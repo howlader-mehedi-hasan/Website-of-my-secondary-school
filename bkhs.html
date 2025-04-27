@@ -1,0 +1,484 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Baintala Kashipur Secondery School</title>
+        <link rel="shortcut icon" type="image/x-icon" href="img/bkhs-logo.png" />
+
+<!--links genareting area start-->
+<link rel="stylesheet" type="text/css" href="s.css" media="all" />
+<!--links genareting area end-->
+
+    </head>
+    <body style="width: 1310px; height: 1672px; border: 1px dotted black;" style="font-family: kalpurush;">
+<!--head area start-->
+
+        <span style="background-color: aqua; position: absolute; top: 5px; left: 5px;">
+        <a href="bkhs.html"><img src="img/bkhs-logo.png" alt="Logo" style="height: 150px; width: auto;" /></a>
+        </span>
+        <div style="background-color: aqua; position: absolute; top: 5px; ;left: 1140px;">
+        <a href="bkhs.html"><img src="img/BKHS.jpg" alt="school building" style="height: 150px; width: 166px;" /></a>
+        </div>
+
+        <div style="font-family: kalpurush; height: 95px; width: 975px; background-color: rgb(111, 199, 202); position: absolute; top: 5px; left: 160px;">
+            <h2 style="color: darkgreen; position: relative; left: 33px; top: -10px; width: fit-content;">বাইনতলা কাশিপুর মাধ্যমিক বিদ্যালয়, রামপাল,বাগেরহাট।</h2>
+            <h2 style="color: darkblue; font-size: 20px; position: relative; left: 40px; top: -30px;">Baintala Kashipur Secondary School, Rampal,Bagerhat.</h2>
+       </div>
+<!--head area end-->
+
+<!--marque area start-->
+        <div style="font-family: kalpurush; background-color: #eeeeee; border: 2px solid blue; height: 53px; width: 970px; position: absolute; top: 105px; left: 160px;">
+            <span style="height: 53px; width: 125px; position: absolute; left: 8px; top: 12px; font-size: 18px;"><p>সর্বশেষ সংবাদঃ</p></span>
+            <span style="height: 45px; width: 822px; position: absolute; left: 130px;">
+
+                <marquee 
+                scrollamount="10" onmouseover="this.scrollAmount = 10" onmouseout="this.scrollAmount = 10"
+                behavior="scroll" direction="left" style="color: orangered;" >
+                    <a style="color: darkorange;" href="#" target="_blank">করোনা প্রতিরধে বিদ্যালায়ের স্বাভাবিক পাঠদান কার্যক্রম অনিদ্রিষ্ট কালের জন্য বন্ধ ঘোষণা করা হয়েছে। </a>
+                    <a style="color:blue;" href="#" target="_blank">সকল শিক্ষার্থীকে Rampal ONLINE CLASSROOM এ ভিডিও ক্লাস দেখার জন্য অনুরোধ করা হলো। </a>
+                    <a style="color: orangered;" href="#" target="_blank">প্রত্যেক শ্রেনীর নতুন সিলেবাস পেতে ক্লিক করুন আথবা নিচে Letest News এ দেখুন।</a>
+                    <a style="color: green;" href="#" target="_blank">শিক্ষা সংক্রান্ত সর্বশেষ সংবাদ পেতে ক্লিক করুন।</a>
+                </marquee>
+            </span>
+        </div>
+<!--marque area end-->
+
+<!--main body start-->
+        <div style="width: 200px; height: 600px; border: 2px solid green; position: absolute; top: 168px; left: 5px;">
+<style>
+    table, th, td {
+    border: 2px solid rgb(170, 0, 0);
+}
+</style>
+         <b><table class="t1">
+                <tbody class="t1">
+                    <tr><td>Student lists of all classes</td></tr>
+                    <tr><td><a href="#">Class Six</a></td></tr>
+                    <tr><td><a href="#">Class Seven</a></td></tr>
+                    <tr><td><a href="#">Class Eight</a></td></tr>
+                    <tr><td><a href="#">Class Nine</a></td></tr>
+                    <tr><td><a href="#">Class Ten</a></td></tr>
+                </tbody>
+            </table>
+            <table class="t2" style="position: absolute; top: 250px;">
+                <tbody>
+                    <tr><td><a href="#">Admission</a></td></tr>
+                    <tr><td><a href="#">Online Teacher Profile</a></td></tr>
+                    <tr><td><a href="#">Admit Card</a></td></tr>
+                    <tr><td><a href="#">Application</a></td></tr>
+                    <tr><td><a href="#">JSC Result</a></td></tr>
+                    <tr><td><a href="#">SSC Result</a></td></tr>
+                </tbody>
+            </table></b>
+        </div>
+
+<!--middle div start-->
+<div style="width: 891px; height: 600px; border: 2px solid green; position: absolute; top: 168px; left: 210px;">
+
+<!-- Main Menu Area Start -->
+    <div>
+<nav class="main-menu">
+    <ul>
+        <li><a href="bkhs.html">Home</a></li>
+        <li><a href="#">About School</a>
+            <ul>
+                <li><a href="schoolhistory" >History</a></li>
+                <li><a href="headmasterprofile" >Headmaster's Profile</a></li>
+                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/01_20190502120058_844.pdf" target="_blank">Board Chitizen's Charter</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Committees</a>
+            <ul>
+                <li><a href="#">Chairman of the Committees</a></li>
+                <li><a href="#">Outher Members</a></li>
+            </ul>
+        </li>
+
+        <li><a href="#">Stafs</a>
+            <ul>
+                <li><a href="#">HM Sk Belal Uddin</a></li>
+                <li><a href="#">AHM Md Mahfuzur Rahman</a></li>
+                <li><a href="#">SK Faruk Hossain</a></li>
+                <li><a href="#">Mt Lepia Khatun</a></li>
+                <li><a href="#">Mt Shahina Khatun</a></li>
+                <li><a href="#">Gobindo Kumer Saha</a></li>
+                <li><a href="#">Talukder Tayeb Ali</a></li>
+                <li><a href="#">Molla Alamin</a></li>
+                <li><a href="#">Ponkoj Kumer Kundu</a></li>
+                <li><a href="#">Bishwa Nath Pal</a></li>
+                <li><a href="#">Hironmoy Dakuya</a></li>
+                <li><a href="#">Sarder Yeamin Hossain</a></li>
+                <li><a href="#">Sardar Rafiqul Islam</a></li>
+                <li><a href="#">Md Taizul Islam</a></li>
+                <li><a href="#">Mt Asia Begum</a></li>
+            </ul>
+        </li>
+        
+        <li><a href="#">Text Books</a>
+            <ul>
+                <li><a href="#">Class Six</a>
+                    <ul>
+                        <li><a href="#">চারুপাঠ</a></li>
+                        <li><a href="#">বাংলা ব্যাকরণ</a></li>
+                        <li><a href="#">আনন্দ পাঠ</a></li>
+                        <li><a href="#">English For Today</a></li>
+                        <li><a href="#">English Grammer And composition</a></li>
+                        <li><a href="#">গণিত</a></li>
+                        <li><a href="#">তথ্য ও যোগাযোগ প্রযুক্তি</a></li>
+                        <li><a href="#">বাংলাদেশ ও বিশ্বপরিচয়</a></li>
+                        <li><a href="#">বিজ্ঞান</a></li>
+                        <li><a href="#">ইসলাম ধর্ম ও নৈতিক শিক্ষা</a></li>
+                        <li><a href="#">হিন্দু ধর্ম ও নৈতিক শিক্ষা</a></li>
+                        <li><a href="#">খ্রিস্টান ধর্ম ও নৈতিক শিক্ষা</a></li>
+                        <li><a href="#">বৌদ্ধ ধর্ম ও নৈতিক শিক্ষা</a></li>
+                        <li><a href="#">চারু ও কারু কলা</a></li>
+                        <li><a href="#">শারিরিক শিক্ষা ও স্বাস্থ্য</a></li>
+                        <li><a href="#">কর্ম ও জীবন মুখি শিক্ষা</a></li>
+                        <li><a href="#">কৃষি শিক্ষা</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Class Seven</a>
+                    <ul>
+                        <li><a href="#">সপ্তাবর্ণা</a></li>
+                        <li><a href="#">বাংলা ব্যাকরণ ও নির্মিতি</a></li>
+                        <li><a href="#">আনৰ্দ পাঠ</a></li>
+                        <li><a href="#">English For Today</a></li>
+                        <li><a href="#">English Grammer And composition</a></li>
+                        <li><a href="#">গণিত</a></li>
+                        <li><a href="#">তথ্য ও যোগাযোগ প্রযুক্তি</a></li>
+                        <li><a href="#">বাংলাদেশ ও বিশ্বপরিচয়</a></li>
+                        <li><a href="#">বিজ্ঞান</a></li>
+                        <li><a href="#">ইসলাম ধর্ম ও নৈতিক শিক্ষা</a></li>
+                        <li><a href="#">হিন্দু ধর্ম ও নৈতিক শিক্ষা</a></li>
+                        <li><a href="#">খ্রিস্টান ধর্ম ও নৈতিক শিক্ষা</a></li>
+                        <li><a href="#">বৌদ্ধ ধর্ম ও নৈতিক শিক্ষা</a></li>
+                        <li><a href="#">চারু ও কারু কলা</a></li>
+                        <li><a href="#">শারিরিক শিক্ষা ও স্বাস্থ্য</a></li>
+                        <li><a href="#">কর্ম ও জীবন মুখি শিক্ষা</a></li>
+                        <li><a href="#">কৃষি শিক্ষা</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Class Eight</a>
+                    <ul>
+                        <li><a href="#">সাহিত্য কণিকা</a></li>
+                        <li><a href="#">বাংলা ব্যাকরণ</a></li>
+                        <li><a href="#">আনন্দ পাঠ</a></li>
+                        <li><a href="#">English For Today</a></li>
+                        <li><a href="#">English Grammer And composition</a></li>
+                        <li><a href="#">গণিত</a></li>
+                        <li><a href="#">তথ্য ও যোগাযোগ প্রযুক্তি</a></li>
+                        <li><a href="#">বাংলাদেশ ও বিশ্বপরিচয়</a></li>
+                        <li><a href="#">বিজ্ঞান</a></li>
+                        <li><a href="#">ইসলাম ধর্ম ও নৈতিক শিক্ষা</a></li>
+                        <li><a href="#">হিন্দু ধর্ম ও নৈতিক শিক্ষা</a></li>
+                        <li><a href="#">খ্রিস্টান ধর্ম ও নৈতিক শিক্ষা</a></li>
+                        <li><a href="#">বৌদ্ধ ধর্ম ও নৈতিক শিক্ষা</a></li>
+                        <li><a href="#">চারু ও কারু কলা</a></li>
+                        <li><a href="#">শারিরিক শিক্ষা ও স্বাস্থ্য</a></li>
+                        <li><a href="#">কর্ম ও জীবন মুখি শিক্ষা</a></li>
+                        <li><a href="#">কৃষি শিক্ষা</a></li>
+                        <li><a href="#">গার্হস্থ বিজ্ঞান</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Class Nine & Ten</a>
+                    <ul>
+                        <li><a href="#">বাংলা সাহিত্য</a></li>
+                        <li><a href="#">বাংলা ব্যাকরণ ও নির্মিতি</a></li>
+                        <li><a href="#">সহপাঠ</a></li>
+                        <li><a href="#">English For Today</a></li>
+                        <li><a href="#">English Grammer And composition</a></li>
+                        <li><a href="#">সাধারণ গণিত</a></li>
+                        <li><a href="#">তথ্য ও যোগাযোগ প্রযুক্তি</a></li>
+                        <li><a href="#">পদার্থ বিজ্ঞান</a></li>
+                        <li><a href="#">রসায়ন</a></li>
+                        <li><a href="#">জীব বিজ্ঞান</a></li>
+                        <li><a href="#">হিসাব বিজ্ঞান</a></li>
+                        <li><a href="#">ব্যাবসায় উদ্দ্যোগ</a></li>
+                        <li><a href="#">ফাইনান্স ও ব্যাংকিং</a></li>
+                        <li><a href="#">ইতিহাস</a></li>
+                        <li><a href="#">পৌরনীতি</a></li>
+                        <li><a href="#">অর্থনীতি</a></li>
+                        <li><a href="#">ভূগোল ও পরিবেশ</a></li>
+                        <li><a href="#">বাংলাদেশ ও বিশ্বপরিচয়</a></li>
+                        <li><a href="#">সাধারণ বিজ্ঞান</a></li>
+                        <li><a href="#">ইসলাম ধর্ম ও নৈতিক শিক্ষা</a></li>
+                        <li><a href="#">হিন্দু ধর্ম ও নৈতিক শিক্ষা</a></li>
+                        <li><a href="#">খ্রিস্টান ধর্ম ও নৈতিক শিক্ষা</a></li>
+                        <li><a href="#">বৌদ্ধ ধর্ম ও নৈতিক শিক্ষা</a></li>
+                        <li><a href="#">চারু ও কারু কলা</a></li>
+                        <li><a href="#">শারিরিক শিক্ষা ও স্বাস্থ্য</a></li>
+                        <li><a href="#">কর্ম ও জীবন মুখি শিক্ষা</a></li>
+                        <li><a href="#">কৃষি শিক্ষা</a></li>
+                        <li><a href="#">উচ্চতর গণিত</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#">Fees</a>
+            <ul>
+                <li><a href="#">Pay fees</a>
+                    <ul>
+                        <li><a href="#">Through Bank Acount</a></li>
+                        <li><a href="#">Through Mobile Banking</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">See the list of fees</a>
+                    <ul>
+                        <li><a href="#">In Exal Sheet</a></li>
+                        <li><a href="#">By Classes</a></li>
+                        <li><a href="#">By Catagori</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#">Result</a>
+            <ul>
+                <li><a href="http://www.educationboardresults.gov.bd" target="_blank">Public Exam Result</a></li>
+                <li><a href="//www.jessoreboard.gov.bd/index.phpsite/result">Institute Result</a></li>
+                <li><a href="//www.jessoreboard.gov.bd/index.phpsite/result">School Result</a></li>
+                <li><a href="//www.jessoreboard.gov.bd/index.phpsite/result">Indivisual Result</a></li>
+            </ul>
+        </li>
+        <li><a href="#">contact us</a>
+            <ul>
+                <li><a href="https://mail.google.com/mail/mu/mp/490/#co" target="_blank">Thrugh Email<br>>bkhs@gmail.com</a></li>
+                <li><a href="Send.html" target="_blank">Through Text Message</a></li>
+                <li><a href="Send.html" target="_blank">Through Phone Call</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+            </div>
+<!-- Main Menu Area End -->
+            <div style="width: 883px; height: 545px; border: 2px solid brown; position: relative; top: 2px; left: 2px;">
+<!-- Slideshow container -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+  width: 70%;
+  margin: auto;
+}
+</style>
+<style>
+    .carousel-caption3 {
+        width: auto;
+        height: auto;
+        background-color: rgb(158, 157, 157);
+        color: rgb(102, 0, 0);
+        font-size: 20px;
+        opacity: 1.0;
+        text-align: center;
+      }
+      .carousel-indicators {
+          position: relative;
+          top: 450px;
+      }
+</style>
+
+<div style="width: 887px; height: 547px;" class="container">
+    <br>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+        <li data-target="#myCarousel" data-slide-to="4"></li>
+      </ol>
+  
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+  
+        <div class="item active">
+          <img src="img/school-1.jpg" alt="Chania" width="460" height="345">
+          <div class="carousel-caption3">
+            <p>Our school building.</p>
+          </div>
+        </div>
+  
+        <div class="item">
+          <img src="img/school2.jpg" alt="Chania" width="460" height="345">
+          <div class="carousel-caption3">
+            <p>Our play ground.</p>
+          </div>
+        </div>
+      
+        <div class="item">
+          <img src="img/school3.jpg" alt="Flower" width="460" height="345">
+          <div class="carousel-caption3">
+            <p>Our school building.</p>
+          </div>
+        </div>
+
+        <div class="item">
+          <img src="img/school4.jpg" alt="Flower" width="460" height="345">
+          <div class="carousel-caption3">
+            <p>Primary school building.</p>
+          </div>
+        </div>
+
+        <div class="item">
+            <img src="img/school5.jpg" alt="Flower" width="460" height="345">
+            <div class="carousel-caption3">
+              <p>Front play ground.</p>
+            </div>
+          </div>
+    
+      </div>
+  
+      <!-- Left and right controls -->
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+<!-- slideshow container end -->
+            </div>
+        </div>
+<!--middle div end-->
+        <div style="width: 200px; height: 600px; border: 2px solid green; position: absolute; top: 168px; left: 1106px;">
+
+            <div style="width: auto; height: 210px; border: 2px solid indianred;">
+                
+                <img class="profile1" src="img/belal.jpg" width="150px" height="150px" alt="skbelaluddin">
+                <h3 style="font-size: 15px; position: absolute; top: 135px; left: 30px;">SK BELAL UDDIN</h3>
+                <h5 style="position: absolute; top: 160px; left: 75px;">Principal</h5>
+            <a href="https://web.facebook.com/skbelal.uddin.10" target="_blank">
+                <input class="button" style="position: absolute; top: 185px; right: 5px;" type="button" value="Profile">
+            </a>
+            </div>
+
+            <div style="width: auto; height: 210px; border: 2px solid indianred;">
+                
+                <img class="profile1" src="img/belal.jpg" width="150px" height="150px" alt="skbelaluddin">
+                <h3 style="font-size: 15px; position: absolute; top: 385px; left: 12px;">AHM MAHFUZUR RAHMAN</h3>
+            <a href="#" target="_blank">
+                <input style="position: absolute; top: 375px; right: 5px;" type="button" value="Profile">
+            </a>
+            </div>
+
+<!--link for facebook page start-->
+            <div><h3 style="position: absolute; left: 25px;">Baintala Kashipur<br>Secondery School</h3>
+                <a style="position: absolute; top: 510px; left: 22px;" href="https://web.facebook.com/Baintala-Kashipur-Secondary-School-101931077908306/">
+                    <img width="150px" height="70px"  src="img/fbpage_logo.png" alt="Facebook Page"></a>
+                
+            </div>
+<!--link for facebook page start-->
+
+        </div>
+
+        <div style="width: 395px; height: 400px; background-color: none; position: absolute; top: 775px; left: 5px; border: 2px solid blue;">
+
+        </div>
+        <div style="width: 500px; height: 400px; background-color: white; position: absolute; top: 775px; left: 405px; border: 2px solid red;">
+<!-- Notice Area Start -->
+                <div class="notice-board">
+                    <h3>Latest Notice</h3>
+                    <div class="notice-board-ticker">
+                        <ul>
+                                                            <li><a href="//www.jessoreboard.gov.bd/uploads/notice/03_20200803163943_146.pdf">২০১৯-২০২০ শিক্ষাবর্ষে একাদশ শ্রেণিতে ভর্তিকৃত শিক্ষার্থীদের ছাড়পত্রের মাধ্যমে ভর্তির আবেদন প্রসঙ্গে</a></li>
+                                                                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/03_20200730230820_770.pdf">২০২০-২০২১ শিক্ষাবর্ষে খুলনা জেলার চ
+
+ুকনগর কলেজে ভর্তি কার্যক্রম স্থগিতকরণ ও কারণ দর্শানোর পত্র</a></li>
+                                                                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/02_20200729103452_737.pdf">এডহক কমিটি স্থগিত প্রসঙ্গে, তীরেরহাট শহীদ ইদ্রিস মেমোরিয়াল মাধ্যমিক বিদ্যালয়, যশোর সদর, যশোর</a></li>
+                                                                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/02_20200728125919_476.pdf">জনাব মো: সামসুল হক, প্রধান শিক্ষক(ভারপ্রাপ্ত) ধুবইল মাধ্যমিক বিদ্যালয়, মিরপুর, কুষ্টিয়া</a></li>
+                                                                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/02_20200727130639_937.pdf">মাওলানাবাদ মাধ্যমিক বিদ্যালয়, ঝিনাইদহ সদর , ঝিনাইদহ এর ম্যানেজিং কমিটির সভাপতির বিরুদ্ধে তদন্ত প্রসঙ্গে</a></li>
+                                                                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/02_20200726130848_568.pdf">কারণ দর্শানোপত্র(প্রধান শিক্ষক ও সভাপতি) গোবরা প্রগতি মাধ্যমিক বিদ্যালয়, গোবরা বাজার, সদর, নড়াইল।</a></li>
+                                                                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/02_20200723103831_957.pdf">হাইকোর্টের রীট পিটিশন প্রসঙ্গে (শহীদ জিয়া মাধ্যমিক বালিকা বিদ্যালয়)</a></li>
+                                                                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/03_20200722122605_293.pdf">২০২০-২০২১ শিক্ষাবর্ষে একাদশ শ্রেণিতে ভর্তি কার্যক্রমের  সময়সূচি</a></li>
+                                                                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/02_20200719141237_748.pdf">অভিযোগ তদন্ত প্রসঙ্গে, এস পি রশিদিয়া মাধ্যমিক বিদ্যালয় , মোড়েলগঞ্জ, বাগেরহাট</a></li>
+                                                                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/02_20200713112202_259.pdf">তীরেরহাট শহীদ ইদ্রিস মেমোলিয়াল মাধ্যমিক বিদ্যালয়ের এডহক কমিটি স্থগিত প্রসঙ্গে</a></li>
+                                                                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/01_20200630143054_902.pdf">যশোর শিক্ষা বোর্ডের ONLINE CLASSROOM এ ভিডিও ক্লাস আপলোড সংক্রান্ত নোটিশ</a></li>
+                                                                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/01_20200616172035_309.pdf">সংস্থা পরিচালিত শিক্ষা প্রতিষ্ঠানের গভর্নিং বডি / ম্যানেজিং কমিটি গঠন সংক্রান্ত বিজ্ঞপ্তি</a></li>
+                                                                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/00_20200718135529_233.pdf">যশোর শিক্ষা বোর্ড থেকে ই-অফিস এবং স্টুডেন্ট ম্যানেজমেন্ট সফটওয়ার হতে সেবা পেতে হলে অনলাইনে প্রশ্নব্যাংকে প্রশ্ন আপলোড ব্যাধতামূলক সংক্রান্ত বিজ্ঞপ্তি দেখুন- পরীক্ষা নিয়ন্ত্রক।</a></li>
+                                                                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/03_20200608103752_514.pdf">কলেজ/উচ্চ মাধ্যমিক বিদ্যালয় কর্তৃক ২০২০-২০২১ শিক্ষা বর্ষে একাদশ শ্রেণিতে ভর্তি চলছে মর্মে কোন প্রচার না করা সংক্রান্ত বিজ্ঞপ্তি</a></li>
+                                                                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/02_20200601145600_257.pdf">সন্ন্যাসী মাধ্যমিক বালিকা বিদ্যালয়, মোড়েলগঞ্জ, বাগেরহাট, স্মারক ও তারিখ সঠিক রেখে পত্রের সংশোধনী।</a></li>
+                                                                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/01_20200519143338_185.pdf">এডহক কমিটি গঠনের অনুমতি সংক্রান্ত বিজ্ঞপ্তি</a></li>
+                                                                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/00_20200608125212_890.pdf">যশোর শিক্ষা বোর্ড থেকে ই-অফিস এবং স্টুডেন্ট ম্যানেজমেন্ট সফটওয়ার  হতে সেবা পেতে হলে অনলাইনে প্রশ্নব্যাংকে প্রশ্ন আপলোড ব্যাধতামূলক সংক্রান্ত বিজ্ঞপ্তি দেখুন- পরীক্ষা নিয়ন্ত্রক।</a></li>
+                                                                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/02_20200422130920_173.pdf">রুদ্রপুর মাধ্যমিক বিদ্যালয়, যশোর সদর, প্রধান শিক্ষককে স্বপদে পুনর্বহাল প্রসঙ্গে।</a></li>
+                                                                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/02_20200422130908_312.pdf">রুদ্রপুর মাধ্যমিক বিদ্যালয়, যশোর সদর, প্রধান শিক্ষককে স্বপদে পুনর্বহাল প্রসঙ্গে।</a></li>
+                                                                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/01_20200417140248_188.pdf">নিম্ন মাধ্যমিক, মাধ্যমিক ও উচ্চ মাধ্যমিক স্তরের বেসরকারি শিক্ষা প্রতিষ্ঠানের গভর্নিং বডি ম্যানেজিং কমিটি গঠন ও নির্বাচন প্রসঙ্গে</a></li>
+                                                                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/02_20200325165254_112.pdf">ধর্মদহ মাধ্যমিক বিদ্যালয়, দৌলতপুর, কুষ্টিয়া এর প্রধান শিক্ষকের কারণ দর্শানো পত্র।</a></li>
+                                                                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/00_20200311102254_206.pdf">জনাব মোঃ আব্দুর রাজ্জাক, ডাটা এন্ত্রি কম্পিউটার অপারেটর -এর আন্তর্জাতিক পাসপোর্টের মেয়াদ নবায়নের লক্ষ্যে অনাপত্তিপত্র</a></li>
+                                                                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/01_20200203131516_587.pdf">জনাব মোহাম্মদ জাকির হোসেন -এর আন্তর্জাতিক পাসপোর্ট নবায়নের অনাপত্তিপত্র</a></li>
+                                                                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/02_20191230170607_987.pdf">সি, এম.সি মাধ্যমিক বিদ্যালয়, আামঝুপি, মেহেরপুর</a></li>
+                                                                <li><a href="//www.jessoreboard.gov.bd/uploads/notice/02_20191230170118_902.pdf">চাপরাইল মাধ্যমিক বিদ্যালয়, কালিগঞ্জ, ঝিনাইদহ</a></li>
+                                                                                    </ul>
+                    </div>
+                </div>
+<!-- Notice Area End -->
+        </div>
+        <div style="width: 395px; height: 400px; background-color: none; position: absolute; top: 775px; left: 910px; border: 2px solid blue;">
+            <h1 style="font-size: 50; align-items: center;">Phone Number For Text Message And Call</h1>
+            <span style="font-size: 30px; background-color: aqua;">+8801718448014</span><span>HM SK Belal Uddin</span>
+            
+            <a href="https://mail.google.com/mail/mu/mp/490/#co" target="_blank"><h1>Click Here To Go To Compose Gmail</h1></a>
+            <h2 style="background-color: turquoise;">. . . bkhs@gmail.com</h2>
+        </div>
+
+<!--main body end-->
+
+<div style="border: 2px solid rgb(226, 43, 180); position: absolute; left: 5px; top: 1180px; width: 1300px;">
+    <h2 style="text-align: center;" >Welcome to Baintala Kashipur Secondery School</h2>
+    <p style="font-size: large; padding: 0px 50px; ">
+        The school is very popular in its own area. It was establishted at 1960 for an educational purpose. Our principle is very honest to maintain this school. He is working as principle since 2010. And he was working as a teacher from 1989. All the teacher of our school are very responsible.The school is very popular in its own area. It was establishted at 1960 for an educational purpose. Our principle is very honest to maintain this school. He is working as principle since 2010. And he was working as a teacher from 1989. All the teacher of our school are very responsible.The school is very popular in its own area. It was establishted at 1960 for an educational purpose. Our principle is very honest to maintain this school. He is working as principle since 2010. And he was working as a teacher from 1989. All the teacher of our school are very responsible.The school is very popular in its own area. It was establishted at 1960 for an educational purpose. Our principle is very honest to maintain this school. He is working as principle since 2010. And he was working as a teacher from 1989. All the teacher of our school are very responsible.The school is very popular in its own area. It was establishted at 1960 for an educational purpose. Our principle is very honest to maintain this school. He is working as principle since 2010. And he was working as a teacher from 1989. All the teacher of our school are very responsible.The school is very popular in its own area. It was establishted at 1960 for an educational purpose. Our principle is very honest to maintain this school. He is working as principle since 2010. And he was working as a teacher from 1989. All the teacher of our school are very responsible.The school is very popular in its own area. It was establishted at 1960 for an educational purpose. Our principle is very honest to maintain this school. He is working as principle since 2010. And he was working as a teacher from 1989. All the teacher of our school are very responsible.
+    </p>
+</div>
+
+<footer style=" font-size: 16px; width: 1300px; height: 54px; border: 2px solid blue; position: absolute; left: 5px; top: 1612px;">
+    <p style="position: absolute; right: 15px; top: 15px;"><b>Version</b> 1.0.0</p>
+    <p style="position: absolute; top: 15px; left: 15px;"> <strong>Copyright © 2020-2021 <a href="bk.html">Baintala Kashipur Secondary School, Rampal,Bagerhat</a></strong>. Government of the People's Republic of Bangladesh. All rights reserved.</p>
+</footer>
+
+    </body>
+</html>
